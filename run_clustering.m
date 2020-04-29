@@ -4,9 +4,9 @@ clear all
 close all
 nsamples = [200,400,600];       %number of samples in each class
 radial_centers = [0, 1.5, 3];   %Each classes radial center
-decay_length = [0.3, 0.3, 0.3]; %The decay length of each class (how far the points in a single class will scatter)
+decay_length = [0.25, 0.25, 0.3]; %The decay length of each class (how far the points in a single class will scatter)
 label_certainty = 10;           %Determines how certain we are of each observed label, higher is more certain. 
-nlabels_pr_class = 4;           %selects the number of initial labels present in each class
+nlabels_pr_class = 6;           %selects the number of initial labels present in each class
 nn = 29;                        %Number of nearest neighbours 
 alpha = 100;                    %hyper parameter that determines the relative strength between the two terms. Suggested values are in the region (1 - 1000)
 beta = 1e-3;                    %hyper parameter that stabilizes the often ill-conditioned matrix we need to cluster. Suggested values are in the region (1e-2 - 1e-8)
@@ -27,7 +27,7 @@ Yobs = convert_labels_to_pseudo_probabilities(labels,nc,label_certainty);
 Ytrue = convert_labels_to_pseudo_probabilities(labels_true,nc,label_certainty);
 
 %Shows the data
-figure(1)
+fig1 =figure('Position',[0,0,1400,600])
 subplot(1,2,1)
 scatter(X(:,1),X(:,2),200,convert_pseudo_probability_to_probability(Yobs),'.')
 title('Input data')
@@ -49,7 +49,7 @@ epsilon = median(dd(:));
 Y = SSL_clustering(L,alpha,beta,Yobs,W);
 
 %Plots the result
-figure(2)
+fig2 = figure('Position',[0,0,1400,600])
 subplot(1,2,1)
 scatter(X(:,1),X(:,2),200,convert_pseudo_probability_to_probability(Y),'.')
 title('Label probabilities')
@@ -58,3 +58,6 @@ subplot(1,2,2)
 U_pred_boost = convert_pseudo_probability_to_probability(convert_labels_to_pseudo_probabilities(label_pred,nc,label_certainty));
 scatter(X(:,1),X(:,2),200,U_pred_boost,'.')
 title('Labels predicted')
+
+print(fig1,'fig1','-dpng')
+print(fig2,'fig2','-dpng')
