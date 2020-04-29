@@ -13,6 +13,7 @@ beta = 1e-3;                    %hyper parameter that stabilizes the often ill-c
 
 
 %%
+addpath('./src')
 %Generate dataset
 [X,labels_true] = generate_gaussian_circles(nsamples,radial_centers,decay_length);
 
