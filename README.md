@@ -4,7 +4,7 @@ This is a minimal example of how to do semi-supervised clustering as described i
 [Data-driven semi-supervised clustering for oil prediction](https://www.sciencedirect.com/science/article/pii/S0098300420306543)
 
 ## Installation
-The code is made for matlab 2021 and might not work for earlier versions of matlab. 
+The code is made for Matlab 2021 and might not work for earlier versions of Matlab. 
 
 ## Run
 To run a simple example and generate the above figure, run the script: run_clustering.m
